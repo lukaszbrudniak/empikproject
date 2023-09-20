@@ -6,13 +6,6 @@ import com.lukbrud.empik.service.UserRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-/**
- * Service implementation for managing user request data.
- * Provides methods for incrementing request counts.
- *
- * @author Lukasz Brudniak
- */
 @Service
 class UserRepositoryServiceImpl implements UserRepositoryService {
     private final UserRepository userRepository;
@@ -22,12 +15,6 @@ class UserRepositoryServiceImpl implements UserRepositoryService {
         this.userRepository = userRepository;
     }
 
-
-    /**
-     * Increment the request count for a user.
-     *
-     * @param login The login of the user for whom the request count should be incremented.
-     */
     @Override
     public void incrementRequestCount(String login) {
         UserEntity userEntity = userRepository.findById(login).orElseGet(() -> {

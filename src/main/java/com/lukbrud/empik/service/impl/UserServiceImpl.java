@@ -15,13 +15,6 @@ import org.springframework.web.client.RestClientException;
 
 import java.util.Optional;
 
-
-/**
- * Service implementation for user-related operations.
- * Fetches user data from GitHub, processes it, and manages request counts.
- *
- * @author Lukasz Brudniak
- */
 @Service
 @Slf4j
 class UserServiceImpl implements UserService {
@@ -38,13 +31,6 @@ class UserServiceImpl implements UserService {
         this.userProcessingService = userProcessingService;
         this.userRepositoryService = userRepositoryService;
     }
-
-    /**
-     * Retrieves user data by login.
-     *
-     * @param login The login of the user to retrieve.
-     * @return Optional containing User object if found, or empty if not found.
-     */
 
     @Override
     @Transactional

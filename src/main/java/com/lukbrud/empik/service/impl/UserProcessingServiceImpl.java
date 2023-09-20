@@ -7,13 +7,6 @@ import com.lukbrud.empik.service.UserProcessingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-/**
- * Service implementation for processing user data.
- * Calculates user-specific values and prepares User objects.
- *
- * @author Lukasz Brudniak
- */
 @Service
 class UserProcessingServiceImpl implements UserProcessingService {
     private final UserCalculationService userCalculationService;
@@ -23,13 +16,6 @@ class UserProcessingServiceImpl implements UserProcessingService {
         this.userCalculationService = userCalculationService;
     }
 
-    /**
-     * Process GitHub user data and calculate user-specific values.
-     *
-     * @param login       The login of the user.
-     * @param githubUser  GitHubUser object containing user data.
-     * @return User object with processed data.
-     */
     @Override
     public User processUserData(String login, GithubUser githubUser) {
         if (githubUser == null) {

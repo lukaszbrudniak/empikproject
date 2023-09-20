@@ -1,14 +1,14 @@
 package com.lukbrud.empik.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USER_REQUEST")
+@Table(
+        name = "USER_REQUEST",
+        indexes = {@Index(name = "idx_login", columnList = "LOGIN")}
+)
 @Getter
 @Setter
 public class UserEntity {

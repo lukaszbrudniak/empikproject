@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserCalculationServiceImplTest {
+class UserCalculationServiceImplTest {
 
     @InjectMocks
     private UserCalculationService userCalculationService = new UserCalculationServiceImpl();
@@ -23,11 +23,14 @@ public class UserCalculationServiceImplTest {
 
     @ParameterizedTest
     @CsvSource({"10, 5, 0.08571428", "0, 5, 0.0", "20, 0, 0.15"})
-    public void testCalculateUserCalculations(int followers, int publicRepos, String expected) {
+    public void shouldCalculateUserCalculations(int followers, int publicRepos, String expected) {
+        // Given
         double expectedResult = new BigDecimal(expected).doubleValue();
 
+        // When
         double result = userCalculationService.calculateUserCalculations(followers, publicRepos);
 
+        // Then
         assertEquals(expectedResult, result, 0.00000001);
     }
 }

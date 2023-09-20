@@ -27,7 +27,8 @@ class UserRepositoryServiceImplTest {
     }
 
     @Test
-    void testIncrementRequestCountUserExists() {
+    void shouldIncrementRequestCountWhenUserExists() {
+        // Given
         String login = "testuser";
 
         UserEntity existingUserEntity = new UserEntity();
@@ -36,21 +37,25 @@ class UserRepositoryServiceImplTest {
 
         when(userRepository.findById(login)).thenReturn(Optional.of(existingUserEntity));
 
+        // When
         userRepositoryService.incrementRequestCount(login);
 
+        // Then
         verify(userRepository, times(1)).save(existingUserEntity);
-
         assertEquals(6, existingUserEntity.getRequestCount());
     }
 
     @Test
-    void testIncrementRequestCountUserDoesNotExist() {
+    void shouldIncrementRequestCountWhenUserDoesNotExist() {
+        // Given
         String login = "testuser";
 
         when(userRepository.findById(login)).thenReturn(Optional.empty());
 
+        // When
         userRepositoryService.incrementRequestCount(login);
 
+        // Then
         verify(userRepository, times(1)).save(argThat(userEntity ->
                 userEntity.getLogin().equals(login) && userEntity.getRequestCount() == 1
         ));

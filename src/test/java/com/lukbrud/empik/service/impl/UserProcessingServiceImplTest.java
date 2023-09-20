@@ -31,34 +31,44 @@ class UserProcessingServiceImplTest {
     }
 
     @Test
-    void testProcessUserDataWithNonNullGithubUser() {
+    void shouldProcessUserDataWithNonNullGithubUser() {
+        // Given
         GithubUser githubUser = podamFactory.manufacturePojo(GithubUser.class);
         githubUser.setFollowers(10);
 
         when(userCalculationService.calculateUserCalculations(10, githubUser.getPublic_repos()))
                 .thenReturn(0.5);
 
+        // When
         User processedUser = userProcessingService.processUserData("testuser", githubUser);
+
+        // Then
         assertNotNull(processedUser);
         assertEquals(0.5, processedUser.getCalculations());
     }
 
     @Test
-    void testProcessUserDataWithNullGithubUser() {
+    void shouldProcessUserDataWithNullGithubUser() {
+        // When
         User processedUser = userProcessingService.processUserData("testuser", null);
+
+        // Then
         assertNull(processedUser);
     }
 
     @Test
-    void testProcessUserDataWithZeroFollowers() {
+    void shouldProcessUserDataWithZeroFollowers() {
+        // Given
         GithubUser githubUser = podamFactory.manufacturePojo(GithubUser.class);
         githubUser.setFollowers(0);
 
         when(userCalculationService.calculateUserCalculations(0, githubUser.getPublic_repos()))
                 .thenReturn(0.0);
 
+        // When
         User processedUser = userProcessingService.processUserData("testuser", githubUser);
 
+        // Then
         assertNotNull(processedUser);
         assertEquals(0.0, processedUser.getCalculations());
     }

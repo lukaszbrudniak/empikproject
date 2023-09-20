@@ -6,33 +6,23 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-
-/**
- * Service implementation for calculating user-specific values.
- * This service calculates user calculations based on provided data.
- *
- * @author Lukasz Brudniak
- */
 @Service
 class UserCalculationServiceImpl implements UserCalculationService {
 
-    /**
-     * Calculate user-specific calculations.
-     *
-     * @param followers    The number of followers the user has.
-     * @param publicRepos   The number of public repositories the user has.
-     * @return The calculated user-specific value.
-     */
+    private static final BigDecimal NUMERATOR = new BigDecimal("6.0");
+    private static final int DENOMINATOR_MULTIPLIER = 2;
+    private static final int SCALE = 8;
+    private static final RoundingMode ROUNDING_MODE = RoundingMode.DOWN;
+
     @Override
     public double calculateUserCalculations(int followers, int publicRepos) {
         if (followers == 0) {
             return 0.0;
         }
 
-        BigDecimal numerator = new BigDecimal("6.0");
-        BigDecimal denominator = new BigDecimal(followers * (2 + publicRepos));
+        BigDecimal denominator = new BigDecimal(followers * (DENOMINATOR_MULTIPLIER + publicRepos));
 
-        BigDecimal result = numerator.divide(denominator, 8, RoundingMode.DOWN);
+        BigDecimal result = NUMERATOR.divide(denominator, SCALE, ROUNDING_MODE);
 
         return result.doubleValue();
     }

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class UserControllerImplTest {
+class UserControllerImplTest {
 
     private UserControllerImpl userController;
 
@@ -34,30 +34,32 @@ public class UserControllerImplTest {
     }
 
     @Test
-    void testGetUserFound() {
+    void shouldReturnUserWhenFound() {
+        // Given
         String login = "testUser";
         User user = podamFactory.manufacturePojo(User.class);
-
         when(userService.getUser(login)).thenReturn(Optional.of(user));
 
+        // When
         ResponseEntity<User> response = userController.getUser(login);
 
+        // Then
         verify(userService).getUser(login);
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(user, response.getBody());
     }
 
     @Test
-    void testGetUserNotFound() {
+    void shouldReturnNotFoundWhenUserNotFound() {
+        // Given
         String login = "nonExistentUser";
-
         when(userService.getUser(login)).thenReturn(Optional.empty());
 
+        // When
         ResponseEntity<User> response = userController.getUser(login);
 
+        // Then
         verify(userService).getUser(login);
-
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }

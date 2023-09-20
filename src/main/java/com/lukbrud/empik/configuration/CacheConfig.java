@@ -9,13 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Configuration class for caching.
- * Enables caching in the application and configures a cache manager.
- *
- * @author Lukasz Brudniak
- */
-
 @Configuration
 @EnableCaching
 public class CacheConfig {

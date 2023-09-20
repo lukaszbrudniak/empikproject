@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-/**
- * Implementation of the UserController interface.
- * Provides endpoints for retrieving user data.
- *
- * @author Lukasz Brudniak
- */
 @AllArgsConstructor
 @RestController
 class UserControllerImpl implements UserController {

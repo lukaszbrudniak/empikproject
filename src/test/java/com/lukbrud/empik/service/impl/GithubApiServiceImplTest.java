@@ -12,7 +12,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class GithubApiServiceImplTest {
+class GithubApiServiceImplTest {
 
     private GithubApiServiceImpl githubApiService;
 
@@ -29,17 +29,18 @@ public class GithubApiServiceImplTest {
     }
 
     @Test
-    void testFetchUserData() {
+    void shouldFetchUserData() {
+        // Given
         String login = "testUser";
         String apiUrl = "https://api.github.com/users/" + login;
         GithubUser expectedUser = podamFactory.manufacturePojo(GithubUser.class);
-
         when(restTemplate.getForObject(apiUrl, GithubUser.class)).thenReturn(expectedUser);
 
+        // When
         GithubUser actualUser = githubApiService.fetchUserData(login);
 
+        // Then
         verify(restTemplate, times(1)).getForObject(apiUrl, GithubUser.class);
-
         assertEquals(expectedUser, actualUser);
     }
 }
