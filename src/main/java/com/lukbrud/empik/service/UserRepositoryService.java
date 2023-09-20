@@ -1,5 +1,5 @@
-package com.lukbrud.empik.service;
+    package com.lukbrud.empik.service;
 
-public interface UserRepositoryService {
-    void incrementRequestCount(String login);
-}
+    public interface UserRepositoryService {
+        void incrementRequestCount(String login);
+    }

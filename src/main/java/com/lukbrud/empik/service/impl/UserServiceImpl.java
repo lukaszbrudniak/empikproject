@@ -36,6 +36,7 @@ class UserServiceImpl implements UserService {
     @Transactional
     public Optional<User> getUser(String login) {
         validateLogin(login);
+        long startTime = System.currentTimeMillis();
 
         try {
             GithubUser githubUser = githubApiService.fetchUserData(login);
@@ -44,6 +45,8 @@ class UserServiceImpl implements UserService {
             if (user != null) {
                 userRepositoryService.incrementRequestCount(login);
             }
+
+            log.info("****** UserServiceImpl.getUser method execution time for login '{}': {} ms", login, (System.currentTimeMillis() - startTime));
 
             return Optional.ofNullable(user);
         } catch (RestClientException e) {

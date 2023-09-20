@@ -1,6 +1,7 @@
 package com.lukbrud.empik.controller.impl;
 
 import com.lukbrud.empik.controller.UserController;
+import com.lukbrud.empik.exception.ResourceNotFoundException;
 import com.lukbrud.empik.model.User;
 import com.lukbrud.empik.service.UserService;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ class UserControllerImpl implements UserController {
     public ResponseEntity<User> getUser(String login) {
         Optional<User> user = userService.getUser(login);
         return user.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseThrow(() -> new ResourceNotFoundException("User not found: " + login));
     }
 
 }
