@@ -1,4 +1,4 @@
-package com.lukbrud.empik.service.impl;
+package com.lukbrud.empik.service;
 
 import com.lukbrud.empik.model.GithubUser;
 
